@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys, csv, pickle, os.path
-from math import *
+#from math import *
 
 ''' sort the list ascending order of price'''
 def sort_liste(tab):
@@ -19,7 +19,7 @@ def sort_liste(tab):
                 tab[i + 1][1] = tmpy
                 imove = 1
 
-
+''' read the data in the file to deermine the price '''
 def read_data(inputfile):
     print(inputfile)
     with open(inputfile,"r") as f:
@@ -34,7 +34,7 @@ def read_data(inputfile):
         return beta0, beta1      
 
         
-'''' print the graph'''
+'''' print the graph '''
 def print_graph(tab, beta1, beta0, x, y):
     import matplotlib.pyplot as plt
     plt.title("Pricing graph")

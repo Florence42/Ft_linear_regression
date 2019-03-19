@@ -20,22 +20,6 @@ def sort_liste(tab):
                 imove = 1
 
 
-def read_data(inputfile):
-    print(inputfile)
-    with open(inputfile,"r") as f:
-        tmp = f.readline()
-        print(tmp)
-        tmp = tmp.replace('\n', '')
-        b = tmp.split("=")
-        print("ici ", b)
-        beta0 = float(b[1])
-        tmp = f.readline()
-        tmp = tmp.replace('\n', '')
-        b = tmp.split("=")
-        print("ici ", b)
-        beta1 = float(b[1])
-        return beta0, beta1      
-
 ''' save beta0 and beta1 for next use of pricing determination '''
 def save_data(outputfile, beta0, beta1):
     with open(outputfile, "w") as f:
@@ -106,6 +90,7 @@ def make_regression(list_price, list_km):
     #print("-------------Ym = ", ym)
     return(beta1, beta0)
 
+''' compute what is call the cost for the gradientdescent '''
 def make_cost(list_price, list_km, beta1, beta0):
     cost = 0.
     m = len(list_price)
@@ -115,15 +100,7 @@ def make_cost(list_price, list_km, beta1, beta0):
     #print ("cost ", cost)
     return cost
 
-
-def print_cost1(list_price, list_km, beta1, beta0):
-    m = len(list_price)
-    print("\n Mileage -- Price -- Pred. -- Gap")
-    for i in range (m):
-        tmp = estimated_price(beta1, beta0, int(list_km[i]))
-        gap = int(list_price[i]) - tmp
-        print( "%8d"% (int(list_km[i])), "--", "%5d"% int(list_price[i]), "--", "%5d"% (int(tmp)), "--", "%5d"% (int(gap))  )
-
+''' informations for the gap between the reality and the predict '''
 def print_cost(tab, beta1, beta0):
     m = len(tab)
     print("\n Mileage -- Price -- Pred. -- Gap")
@@ -256,6 +233,8 @@ def treat_csv_file(inputfile, outputfile):
         save_data(outputfile, beta0, beta1)
         print("\n The graph will be displayed .....")
         print_graph(tab, beta1, beta0, beta1_f, beta0_f)
+        print("\n Here  we goo, that's pretty cool")
+        print("\n By now ...")
 
 def usage():
 	print("Error :")
